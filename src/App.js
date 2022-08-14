@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import { createContext, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import './App.css';
+import Header from './components/Header';
+import {app} from './firebase'
+import Home from './routes/Home';
+import LogIn from './routes/LogIn';
+import Register from './routes/Register';
+
+export const AppContext = createContext(null);
 
 function App() {
+  const [route, setRoute] = useState('home');
+  const [user, setUser] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{route, setRoute, user, setUser}}>
+      <Header />
+      <Toaster/>
+      <main className='p-6'>
+        {route === 'home' && <Home />}
+        {route === 'login' && <LogIn />}
+        {route === 'register' && <Register />}
+        {user && <p>Usuario logeado: {user.email}</p>}
+      </main>
+    </AppContext.Provider>
   );
 }
 

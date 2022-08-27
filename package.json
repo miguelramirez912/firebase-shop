@@ -36,7 +36,9 @@
           ],
           "max-lines-per-function": [
             "off"
-          ]
+          ],
+          "no-restricted-globals": "warn",
+          "no-unused-vars": "off"
         }
       }
     ]

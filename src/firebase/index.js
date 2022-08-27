@@ -3,7 +3,8 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getMessaging, getToken } from "firebase/messaging";
-// import serviceWorker from '../firebase-messaging-sw'
+import { getFirestore } from "firebase/firestore";
+
 
 const vapidKey = 'BIbgh15cbOjFED5Sk-Xmtje6I8HN8ISVdi3P5y9772lNXMOMh8fi7CELGpf5zCPjT3AVsU2hXJ7XHfH15iYYYt0';
 
@@ -60,3 +61,7 @@ const sendTokenToServer = token => {
   console.log('Ha almacenado el token');
   localStorage.setItem('tokenSentToServer', '1');
 }
+
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app);
+

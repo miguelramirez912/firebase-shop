@@ -9,6 +9,7 @@ import Register from './routes/Register';
 import Shopping from './routes/Shopping';
 import { Toaster, toast } from 'react-hot-toast';
 import { onMessage } from 'firebase/messaging';
+import TaskList from './routes/TaskList';
 
 
 export const AppContext = createContext(null);
@@ -32,11 +33,12 @@ function App() {
       <div className='h-screen'>
         <Toaster/>
         <Header />
-        <main className='p-6 mt-12 '>
+        <main className='p-6 my-12 '>
           {route === 'home' && <Home />}
           {route === 'login' && <LogIn />}
           {route === 'register' && <Register />}
           {route === 'shopping' && <Shopping />}
+          {route === 'tasklist' && <TaskList />}
           {user && <p>Usuario logeado: {user.email}</p>}
         </main>
         <Footer />

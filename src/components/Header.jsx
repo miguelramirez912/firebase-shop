@@ -27,7 +27,7 @@ const Header = () => {
             <header className='h-20 w-full bg-gray-100 shadow-lg flex items-center justify-between px-8'>
                 <div className='flex items-center gap-2 cursor-pointer' onClick={() => setRoute('home')}>
                     <SiFirebase className='text-2xl text-pink-600'/>
-                    <span className='text-xl text-pink-600 semibold'>Firebase Shop</span>
+                    <span className='text-xl text-pink-600 semibold'>Firebase Sho V2p</span>
                 </div>
                 <div className='flex gap-2'>
                     {user 

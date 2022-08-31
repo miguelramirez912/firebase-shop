@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../App";
 import { addNewTask, deleteTask, getTasks, updateTask } from "../firebase/taskController";
 
 const TaskList = () => {
@@ -6,8 +7,10 @@ const TaskList = () => {
     const [tasks, setTasks] = useState([]);
     const [btnMode, setBtnMode] = useState('add');
 
+    const { user } = useContext(AppContext);
+
     const createNewTask = async () => {
-        await addNewTask(task);
+        await addNewTask(task).catch(e => console.log(e));
         setTask({ title: "", description: ""});
         initializeTasks();
     }
@@ -64,7 +67,8 @@ const TaskList = () => {
                     onChange={e => setTask({...task, description: e.target.value})} 
                 />
                 <button 
-                    className="bg-sky-400 text-white rounded shadow py-1 hover:bg-sky-500 transition font-semibold" 
+                    className="bg-sky-400 text-white rounded shadow py-1 hover:bg-sky-500 transition font-semibold disable:bg-sky-200" 
+                    disabled={!user}
                     onClick={() => btnMode === 'add' ? createNewTask() : updateExistingTask()}
                 >
                     {btnMode === 'add' ? 'Agregar' : 'Actualizar'}
@@ -83,6 +87,9 @@ const TaskList = () => {
                     </div>
                 </div>)}
             </div>
+            {!user && (
+                <p className="text-red-500">Necesitas estar logeado para acceder a la base de datos</p>
+            )}
         </div>
     )
 }
